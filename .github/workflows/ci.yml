@@ -36,14 +36,20 @@ jobs:
           echo "Testing the current build ..."
           echo 
           npx run-func ./scan-headers.js scan "https://juice-shop.herokuapp.com" md >> ./comment.md
-          issues=$(cat ./comment.md | grep -c "(erro1r)")
+          issues=$(grep -c "(error)" ./comment.md) || true 
           echo "Found ${issues} issues"
           echo "::set-output name=issues::${issues}"
       
       - name: Add the PR comment
-        if: ${{ steps.run_check.outputs.issues != 0 }}
         uses: machine-learning-apps/pr-comment@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           path: ./comment.md
+
+      # if errors exist in the output fail the action
+      - name: Mark the action as failed
+        if: ${{ steps.run_check.outputs.issues != 0 }}
+        run:
+          echo "Found ${issues} issues. Marking the action as failed."
+          exit 1
