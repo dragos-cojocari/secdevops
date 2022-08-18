@@ -19,5 +19,11 @@ jobs:
 
       - run: npm install
 
+      # test the checker first
       - run: |
-        npx run-func ./scan-headers.js scan "https://juice-shop.herokuapp.com" | jq '.results'
+          echo "Testing the sanity of the checker ..."
+          npm test
+
+      - run: |
+          echo "Testing the current build ..."
+          npx run-func ./scan-headers.js scan "https://juice-shop.herokuapp.com" | jq '.results'
