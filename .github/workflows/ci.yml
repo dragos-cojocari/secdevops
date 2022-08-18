@@ -35,6 +35,6 @@ jobs:
       
       - uses: mshick/add-pr-comment@v1
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          repo-token: ${{secrets.GITHUB_TOKEN}}
           message: |
             Test comment
