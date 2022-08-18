@@ -49,9 +49,11 @@ jobs:
 
       # if errors exist in the output fail the action
       - name: Mark the action as failed
-        if: ${{ steps.run_check.outputs.issues != 0 }}
         run:
           set -e
           set -o pipefail
-          echo "Found ${{ steps.run_check.outputs.issues }} issues. Marking the action as failed."
-          exit 1
+          
+          if ! [ "${{ steps.run_check.outputs.issues }}" == "0" ]; then
+            echo "Found ${{ steps.run_check.outputs.issues }} issues"
+            exit 1
+          fi 
