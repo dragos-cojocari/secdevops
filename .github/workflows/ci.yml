@@ -31,10 +31,12 @@ jobs:
           set -e
           set -o pipefail
           echo "Testing the current build ..."
-          data=$(npx run-func ./scan-headers.js scan "https://juice-shop.herokuapp.com")
+          echo 
+          npx run-func ./scan-headers.js scan "https://juice-shop.herokuapp.com" md >> ./comment.md
       
-      - uses: mshick/add-pr-comment@v1
+      - name: Add the PR comment
+        uses: machine-learning-apps/pr-comment@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          repo-token: ${{secrets.GITHUB_TOKEN}}
-          message: |
-            Test comment
+          path: ./comment.md

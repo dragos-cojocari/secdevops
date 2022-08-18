@@ -20,9 +20,16 @@ var self = module.exports = {
         // })
     },
 
-    scan: (url) => {
+    scan: (url, format = "") => {
         self.checkHeaders(url).then(res => {
-            console.log(JSON.stringify({ "results": res.messages }));
+            if (format == "md") {
+                const formattedOutput = res.messages.reduce((total, item) => total + `- error: ${item.msg} (${item.type})\n`, "");
+                console.log(formattedOutput)
+            }
+            else {
+                console.log(res.messages)
+            }
+
         });
     }
 }
