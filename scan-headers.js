@@ -22,14 +22,15 @@ var self = module.exports = {
 
     scan: (url, format = "") => {
         self.checkHeaders(url).then(res => {
-            if (format == "md") {
+            if (res.status != 200) {
+                process.exit(1)
+            } else if (format == "md") {
                 const formattedOutput = res.messages.reduce((total, item) => total + `- error: ${item.msg} (${item.type})\n`, "");
                 console.log(formattedOutput)
             }
             else {
                 console.log(res.messages)
             }
-
         });
     }
 }
