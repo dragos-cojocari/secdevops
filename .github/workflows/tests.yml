@@ -1,4 +1,4 @@
-name: ci
+name: tests
 
 on:
   pull_request:
@@ -19,5 +19,4 @@ jobs:
 
       - run: npm install
 
-      - run: |
-        npx run-func ./scan-headers.js scan "https://juice-shop.herokuapp.com" | jq '.results'
+      - run: npm test
