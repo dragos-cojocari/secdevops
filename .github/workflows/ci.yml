@@ -27,14 +27,19 @@ jobs:
           npm test
 
       # test the build now
-      - run: |
+      - id: run_check
+        run: |
           set -e
           set -o pipefail
           echo "Testing the current build ..."
           echo 
           npx run-func ./scan-headers.js scan "https://juice-shop.herokuapp.com" md >> ./comment.md
+          issues=$(cat ./comment.md | grep -c "(error)")
+          echo "Found ${issues} issues"
+          echo "::set-output name=issues::${issues}"
       
       - name: Add the PR comment
+        if: ${{ steps.run_check.outputs.issues != 0 }}
         uses: machine-learning-apps/pr-comment@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
