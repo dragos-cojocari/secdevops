@@ -33,13 +33,8 @@ jobs:
           echo "Testing the current build ..."
           data=$(npx run-func ./scan-headers.js scan "https://juice-shop.herokuapp.com")
       
-      - uses: actions/github-script@v5
+      - uses: mshick/add-pr-comment@v1
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '👋 Thanks for reporting!'
-            })
+          # github-token: ${{secrets.GITHUB_TOKEN}}
+          message: |
+            Test comment
