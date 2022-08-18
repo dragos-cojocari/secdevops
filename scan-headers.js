@@ -23,8 +23,6 @@ var self = module.exports = {
     scan: (url) => {
         self.checkHeaders(url).then(res => {
             console.log(JSON.stringify({ "results": res.messages }));
-            if (res.messages.some(msg => msg.type === "error"))
-                process.exit(1)
         });
     }
 }
