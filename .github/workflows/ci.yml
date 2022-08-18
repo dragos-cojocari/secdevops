@@ -36,7 +36,7 @@ jobs:
           echo "Testing the current build ..."
           echo 
           npx run-func ./scan-headers.js scan "https://juice-shop.herokuapp.com" md >> ./comment.md
-          issues=$(grep -c "(alphabetagamma)" ./comment.md) || true 
+          issues=$(grep -c "(error1)" ./comment.md) || true 
           echo "Found ${issues} issues"
           echo "::set-output name=issues::${issues}"
       
@@ -49,7 +49,7 @@ jobs:
 
       # if errors exist in the output fail the action
       - name: Mark the action as failed
-        run:
+        run: | 
           set -e
           set -o pipefail
           
