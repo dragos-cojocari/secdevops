@@ -1,0 +1,19 @@
+{
+  "name": "secdevops",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scan-headers.js",
+  "scripts": {
+    "test": "mocha ./test-scanner.js",
+    "cli": "npx run-func ./scan-headers.js scan"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "check-my-headers": "^0.1.2"
+  },
+  "devDependencies": {
+    "mocha": "^10.0.0",
+    "run-func": "^3.0.0"
+  }
+}
