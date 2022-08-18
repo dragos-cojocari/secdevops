@@ -36,22 +36,14 @@ jobs:
           echo "Testing the current build ..."
           echo 
           npx run-func ./scan-headers.js scan "https://juice-shop.herokuapp.com" md >> ./comment.md
-          issues=$(cat ./comment.md | grep -c "(error)")
+          issues=$(cat ./comment.md | grep -c "(erro1r)")
           echo "Found ${issues} issues"
           echo "::set-output name=issues::${issues}"
-          echo "::set-output name=details::$(cat ./comment.md)"
       
       - name: Add the PR comment
-        if: ${{ steps.run_check.outputs.issues != 0 }}  
-        uses: mshick/add-pr-comment@v1
+        if: ${{ steps.run_check.outputs.issues != 0 }}
+        uses: machine-learning-apps/pr-comment@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          message: ${{ steps.run_check.outputs.details }}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Add the PR comment
-      #   if: ${{ steps.run_check.outputs.issues != 0 }}
-      #   uses: machine-learning-apps/pr-comment@master
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     path: ./comment.md
+          path: ./comment.md
