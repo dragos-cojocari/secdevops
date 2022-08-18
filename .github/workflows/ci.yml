@@ -26,6 +26,7 @@ jobs:
           echo "Testing the sanity of the checker ..."
           npm test
 
+      # test the build now
       - run: |
           set -e
           set -o pipefail
