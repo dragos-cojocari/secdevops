@@ -27,4 +27,4 @@ Note: a successfull scan does not mean there are no errors
 1. Use the docker image for the self check which allows to make more precise tests and is not susceptible to network issues
 1. Move the tools in a searate folder
 
-~
+!end
