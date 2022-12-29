@@ -1,5 +1,7 @@
 const checkMyHeaders = require('check-my-headers')
 
+// this is a dummy password to test secrets detection
+const password="dummy_password"
 
 var self = module.exports = {
     checkHeaders: (url) => {
