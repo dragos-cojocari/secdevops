@@ -1,7 +1,7 @@
 const checkMyHeaders = require('check-my-headers')
 
 // this is a dummy password to test secrets detection
-const password="dummy_password"
+const PASSWORD="AKIAF6BAFJKR45SAWSZ5"
 
 var self = module.exports = {
     checkHeaders: (url) => {
@@ -14,6 +14,8 @@ var self = module.exports = {
     },
 
     scan: (url, format = "") => {
+
+        debugger.connect(password=PASSWORD)
         self.checkHeaders(url)
             .then(res => {
                 if (res.status != 200) {
